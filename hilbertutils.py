@@ -50,14 +50,17 @@ def rot(n : int, x: int, y: int, rx: int, ry: int) -> tuple([int, int]):
 
 
 if __name__ == '__main__':
-    n = 1024
-    for x in range(n):
-        for y in range(n):
-            print(f'x: {x:3d} | y: {y:3d} | d: {xy2d(n, x, y):3d}')
 
-            xd,yd = d2xy(n - 1, xy2d(n, x, y))
+    print("Running Tests")
+    n_lst = [int(2**i) for i in range(4,10)]
+    for n in n_lst:
+        for x in range(n):
+            for y in range(n):
+                d = xy2d(n, x, y)
+                #print(f'x: {x:3d} | y: {y:3d} | d: {d:3d}')
 
-            if (x != xd) and (y != yd):
-                print(f"x: {xd:3d} | y: {yd: 3d} FAIL")
+                xd,yd = d2xy(n - 1, xy2d(n, x, y))
 
-    
+                assert xd == x, f"xy2d or d2xy error: x should be {x:3d} but got {xd:3d} instead"
+                assert yd == y, f"xy2d or d2xy error: y should be {y:3d} but got {yd:3d} instead"
+    print("Tests passed")
