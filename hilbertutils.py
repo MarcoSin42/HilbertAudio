@@ -1,5 +1,6 @@
 import pickle
 import os
+import pyaudio
 
 def xy2d(n: int, x: int, y: int) -> int:
     """Takes a 2d point and returns the point's location on the hilbert curve
@@ -89,11 +90,9 @@ def generate_hilbert_path(n: int) -> list:
 
     # TODO: Check for existence of cached hilbert path
 
-    path = [[0 for i in range(n)] for y in range(n)]
-    for x in range(n):
-        for y in range(n):
-            path[x][y] =  xy2d(n, x, y)
-
+    path = [0] * n * n
+    for d in range(len(path)):
+        path[d] = d2xy(n, d)
     return path
 
 if __name__ == '__main__':
