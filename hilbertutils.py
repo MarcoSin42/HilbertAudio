@@ -1,4 +1,17 @@
+import pickle
+import os
+
 def xy2d(n: int, x: int, y: int) -> int:
+    """Takes a 2d point and returns the point's location on the hilbert curve
+
+    Args:
+        n (int): The dimension of the hilbert curve
+        x (int): The x coordinate of the 2d point
+        y (int): The y coordinate of the 2d point
+
+    Returns:
+        int: the point on the hilbert curve
+    """
     rx: int = 0
     ry: int = 0
     s: int = int(n / 2)
@@ -15,6 +28,15 @@ def xy2d(n: int, x: int, y: int) -> int:
     return d
 
 def d2xy(n: int, d: int) -> tuple([int, int]):
+    """ Takes a point on the n-order hilbert curve and returns it's coordinates in 2d
+
+    Args:
+        n (int): The dimension of the hilbert curve
+        d (int): The point on the hilbert curve
+
+    Returns:
+        tuple([int, int]): x,y coordinates 
+    """
     rx: int = 0
     ry: int = 0
     s: int = 1
@@ -38,8 +60,16 @@ def d2xy(n: int, d: int) -> tuple([int, int]):
     return x,y
 
 def rot(n : int, x: int, y: int, rx: int, ry: int) -> tuple([int, int]):
+    """Given a 2D point, (x,y), return the rotated version of the point
+
+    Args:
+        n (int): Order of the hilbert curve
+
+    Returns:
+        tuple([int, int]): (x,y) rotated version of the 2D point
+    """
     if ry == 0:
-        if ry == 1:
+        if rx == 1:
             x = n - 1 - x
             y = n - 1 - y
         
@@ -48,6 +78,23 @@ def rot(n : int, x: int, y: int, rx: int, ry: int) -> tuple([int, int]):
     
     return x,y
 
+
+def generate_hilbert_path(n: int) -> list:
+    """Generates a hilbert path and writes it to a file if it doesn't yet exist.
+    If it does, the load the file as this function can take a long time to run.
+
+    Args:
+        n (int): Order of the hilbert curve.
+    """
+
+    # TODO: Check for existence of cached hilbert path
+
+    path = [[0 for i in range(n)] for y in range(n)]
+    for x in range(n):
+        for y in range(n):
+            path[x][y] =  xy2d(n, x, y)
+
+    return path
 
 if __name__ == '__main__':
 
