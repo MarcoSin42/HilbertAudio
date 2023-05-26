@@ -1,7 +1,3 @@
-import pickle
-import os
-import pyaudio
-
 def xy2d(n: int, x: int, y: int) -> int:
     """Takes a 2d point and returns the point's location on the hilbert curve
 
@@ -82,7 +78,7 @@ def rot(n : int, x: int, y: int, rx: int, ry: int) -> tuple([int, int]):
 
 def generate_hilbert_path(n: int) -> list:
     """Generates a hilbert path and writes it to a file if it doesn't yet exist.
-    If it does, the load the file as this function can take a long time to run.
+    If it does, then load the file as this function can take a long time to run.
 
     Args:
         n (int): Order of the hilbert curve.
