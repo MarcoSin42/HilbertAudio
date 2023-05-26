@@ -9,7 +9,7 @@ Sight through Sound is project which, as the name suggests, seeks to be a sight 
 # Current challenges
 
 1. Images are too 'noisy' as in there is probably a ton of extraneous information that probably isn't helpful to navigate the world.  A way to reduce the extraneous information is through computer vision methods such as edge detection.
-2. The 'sound' sounds like crap, it just plays pure sinewaves.  Is there way to make it sound more appealing?  
+2. The 'sound' sounds like crap, it just plays pure sinewaves.  Is there way to make it sound more appealing?  **IT REALLY HURTS THE EARS.  AGGGGH**
 
 # Getting Started on maintaining this project
 
@@ -22,7 +22,7 @@ Change your directory to the root level where requirements.txt is located.  Then
 
 # How to use the **hilbert2audio** CLI
 
-    python hilbert2audio.py <Path to Image>
+    python image2audio.py <Path to Image>
 
 # Getting into Contact with me (marco)
 
