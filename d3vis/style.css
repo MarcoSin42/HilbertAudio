@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+    background-color: rgba(255, 255, 255, 0.737);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 85%;
+    top:5%;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    padding: 10px;
+    position: static;
+
+    margin: auto;
+}
+
+label {
+    display: block;
+    position: static;
+
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+div {
+    width: min-content;
+    height: min-content;
+    position: static;
+    box-sizing: border-box;
+
+    background-color: rgb(247, 247, 247);
+    outline: auto;
+    
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    right: 2.5%;
+    padding: 25px;
+    
+    margin: auto;
+    margin-top: 10px;
+}
+
+.graph {
+    width: min-content;
+    height: min-content;
+    position: static;
+
+    background-color: rgb(148, 89, 89);
+    padding: 10px;
+    outline: solid;
+    
+    margin: auto;
+}
+
+.graph:hover {
+    background-color: aqua;
+}

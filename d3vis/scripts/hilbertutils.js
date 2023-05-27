@@ -1,5 +1,6 @@
 /** Reimplementation of the python algorithm */
 
+
 function xy2d(n, x, y) {
     var rx = 0;
     var ry = 0;
@@ -55,4 +56,14 @@ function rot(n, x, y, rx, ry) {
     }
 
     return [x, y];
+}
+
+function generatePath(n) {
+    var path = [];
+
+    for (let index = 0; index < n*n; index++) {
+        path.push(d2xy(n, index));
+    }
+
+    return path;
 }

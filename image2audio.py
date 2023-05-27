@@ -4,7 +4,6 @@ import numpy as np
 from PIL import Image, ImageOps
 import os
 from math import floor
-from pyaudio import PyAudio
 from scipy.io.wavfile import write
 
 LOWER_FREQ = 27.5 # Hz
