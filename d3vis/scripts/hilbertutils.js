@@ -1,6 +1,5 @@
 /** Reimplementation of the python algorithm */
-
-
+var d3 = require('./d3.v5.min.js')
 function xy2d(n, x, y) {
     var rx = 0;
     var ry = 0;
@@ -46,24 +45,38 @@ function d2xy(n, d) {
 }
 
 function rot(n, x, y, rx, ry) {
+    var t;
     if (ry == 0) {
         if (rx == 1) {
-            x = n - 1 * x;
-            y = n - 1 * y;
+            x = n - 1 - x;
+            y = n - 1 - y;
         }
-
         return [y, x];
     }
 
     return [x, y];
 }
 
-function generatePath(n) {
-    var path = [];
+function generatePath(n, size) {
+    /**
+     * param n (int): The dimension of the hilbert curve
+     * param size (int): The actual dimensions of the canvas
+     * param context (d3.path()): What we're drawing on
+     */
+    var path = d3.path();
+
+    var unit = Math.floor((size - (size / n)) / n);
+    console.log(unit);
+    var x,y;
+
+    path.moveTo(unit, unit);
 
     for (let index = 0; index < n*n; index++) {
-        path.push(d2xy(n, index));
+        [x,y] = d2xy(n, index);
+        console.log("x, y:" + [x *unit,y*unit]);
+        path.lineTo(x * unit + unit, y * unit + unit);
     }
-
+    
     return path;
 }
+

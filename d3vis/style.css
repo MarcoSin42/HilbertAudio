@@ -42,36 +42,25 @@ label {
 }
 
 div {
-    width: min-content;
+    width: 95%;
     height: min-content;
     position: static;
-    box-sizing: border-box;
 
-    background-color: rgb(247, 247, 247);
-    outline: auto;
+    background-color: rgba(130, 129, 129, 0.226);
+    outline: none;
+    border-radius: 20px;
     
-    top: 10px;
-    bottom: 10px;
-    left: 0;
-    right: 2.5%;
     padding: 25px;
     
-    margin: auto;
-    margin-top: 10px;
+    margin: 25px auto auto 25px;
+    
 }
 
 .graph {
-    width: min-content;
-    height: min-content;
-    position: static;
 
-    background-color: rgb(148, 89, 89);
-    padding: 10px;
+    background-color: rgba(130, 129, 129, 0.226);
+    padding: 20px;
     outline: solid;
-    
-    margin: auto;
-}
-
-.graph:hover {
-    background-color: aqua;
+    caption-side: bottom;
+    text-align: center;
 }
