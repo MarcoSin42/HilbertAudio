@@ -1,5 +1,4 @@
 /** Reimplementation of the python algorithm */
-var d3 = require('./d3.v5.min.js')
 function xy2d(n, x, y) {
     var rx = 0;
     var ry = 0;
@@ -66,14 +65,12 @@ function generatePath(n, size) {
     var path = d3.path();
 
     var unit = Math.floor((size - (size / n)) / n);
-    console.log(unit);
     var x,y;
 
     path.moveTo(unit, unit);
 
     for (let index = 0; index < n*n; index++) {
         [x,y] = d2xy(n, index);
-        console.log("x, y:" + [x *unit,y*unit]);
         path.lineTo(x * unit + unit, y * unit + unit);
     }
     
