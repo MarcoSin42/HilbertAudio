@@ -30,27 +30,38 @@
     var height = 600;
     var initial_order = 4;
 
-    var path = generatePath(2**initial_order, width);
-
     var svg = d3.select("#curve").append("svg")
         .attr("width", width).attr("height", height);
     
-    svg.append("path")
+    var path = svg.append("path")
         .style("stroke", "black")
-        .style("stroke-width", 32)
+        .style("stroke-width", 64 / 2**initial_order)
         .style("opacity", 0.25)
         .style("fill", "none")
-        .attr("d", path);
+        .attr("d", generatePath(2**initial_order, width));
+    
+    var len = path.node().getTotalLength();
 
     function updateOrder(newOrder)
     {
-        path=generatePath(2**newOrder, width);
-        svg.select('path')
+        path
         .style("stroke", "black")
         .style("stroke-width", 64 / 2**newOrder)
         .style("opacity", 0.25)
         .style("fill", "none")
-        .attr("d", path);
+        .attr('stroke-dashoffset', 0)
+        .attr("d", generatePath(2**newOrder, width))
+        .transition();
+
+        len = path.node().getTotalLength();
+
+        path
+        .attr('stroke-dasharray', len + " " + len)
+        .attr("stroke-dashoffset", len)
+        .transition()
+        .duration(2000)
+        .attr('stroke-dashoffset', 0);
+        
     }
 
 
