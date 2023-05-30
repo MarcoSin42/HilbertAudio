@@ -15,9 +15,15 @@
 
     <div>
         <input type="file"
-        id="image" name="image"
-        accept="image/png, image/jpeg">
-        <input type="range" value="4" id="orderInputId" min="1" max="8" step="1" oninput="orderOutputId.value = orderInputId.value; updateOrder(orderInputId.value);">  
+            id="image" name="image"
+            accept="image/png, image/jpeg"
+            oninput="console.log('got file!');">
+        <input type="range" 
+            value="4" 
+            id="orderInputId" 
+            min="1" max="8" 
+            step="1" 
+            oninput="orderOutputId.value = orderInputId.value; updateOrder(orderInputId.value);">  
         <output> Order: </output><output id="orderOutputId">4</output>
     </div>
     
@@ -63,23 +69,25 @@
     function updateOrder(newOrder)
     {
         //playSound(arr, audioCtx);
-        path
-        .style("stroke", "black")
-        .style("stroke-width", 64 / 2**newOrder)
-        .style("opacity", 0.25)
-        .style("fill", "none")
-        .attr("d", generatePath(2**newOrder, width))
-        .interrupt();
+        path.style("stroke", "black")
+            .style("stroke-width", 64 / 2**newOrder)
+            .style("opacity", 0.25)
+            .style("fill", "none")
+            .attr("d", generatePath(2**newOrder, width))
+            .interrupt();
 
         len = path.node().getTotalLength();
 
-        path
-        .attr('stroke-dasharray', len + " " + len)
-        .attr("stroke-dashoffset", len)
-        .transition()
-        .duration(2000)
-        .attr('stroke-dashoffset', 0);
+        path.attr('stroke-dasharray', len + " " + len)
+            .attr("stroke-dashoffset", len)
+            .transition()
+            .duration(2000)
+            .attr('stroke-dashoffset', 0);
         
+    }
+
+    function updatebg() {
+
     }
 
 
