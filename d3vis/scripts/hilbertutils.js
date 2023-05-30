@@ -60,18 +60,17 @@ function generatePath(n, size) {
     /**
      * param n (int): The dimension of the hilbert curve
      * param size (int): The actual dimensions of the canvas
-     * param context (d3.path()): What we're drawing on
      */
     var path = d3.path();
 
-    var unit = Math.floor((size - (size / n)) / n);
+    var unit =(size) / n;
     var x,y;
 
-    path.moveTo(unit, unit);
+    path.moveTo(unit/2, unit/2);
 
     for (let index = 0; index < n*n; index++) {
         [x,y] = d2xy(n, index);
-        path.lineTo(x * unit + unit, y * unit + unit);
+        path.lineTo(x * unit +unit/2, y * unit + unit/2);
     }
     
     return path;
