@@ -62,9 +62,9 @@
     var path = svg.append("path")
         .style("stroke", "black")
         .style("stroke-width", 64 / 2**initial_order)
-        .style("opacity", 0.25)
+        .style("opacity", 0.5)
         .style("fill", "none")
-        .attr("d", generatePath(2**initial_order, width));
+        .attr("d", generatePath(initial_order, width));
     
     var len = path.node().getTotalLength();
 
@@ -82,9 +82,8 @@
         //playSound(arr, audioCtx);
         path.style("stroke", "black")
             .style("stroke-width", 64 / 2**newOrder)
-            .style("opacity", 0.25)
             .style("fill", "none")
-            .attr("d", generatePath(2**newOrder, width))
+            .attr("d", generatePath(newOrder, width))
             .interrupt();
 
         len = path.node().getTotalLength();
@@ -107,7 +106,6 @@
                     .attr('width', width)
                     .attr('height', height)
                     .attr("opacity", "25%");
-
             };
             reader.readAsDataURL(input.files[0]);
         }
