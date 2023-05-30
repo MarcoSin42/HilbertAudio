@@ -8,11 +8,10 @@ function playSound(arr, context) {
     source.buffer = buffer;
     source.connect(context.destination);
     source.start(0);
-  }
+}
   
-  function sineWaveAt(sampleNumber, tone, context) {
+function sineWaveAt(sampleNumber, tone, context) {
     var sampleFreq = context.sampleRate / tone
     return Math.sin(sampleNumber / (sampleFreq / (Math.PI * 2)))
-  }
-  
-  
+}
+
