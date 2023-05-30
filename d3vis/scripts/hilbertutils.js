@@ -56,21 +56,34 @@ function rot(n, x, y, rx, ry) {
     return [x, y];
 }
 
-function generatePath(n, size) {
+function generatePath(order, size) {
     /**
-     * param n (int): The dimension of the hilbert curve
+     * param order (int): The order of the hilbert curve
      * param size (int): The actual dimensions of the canvas
      */
     var path = d3.path();
 
-    var unit =(size) / n;
+    var unit = size / (2**order);
     var x,y;
 
-    path.moveTo(unit/2, unit/2);
+    if ((order % 2) == 1) {
+        path.moveTo(0, unit/2);
+    } else {
+        path.moveTo(unit/2, 0);
+    }
+    
 
-    for (let index = 0; index < n*n; index++) {
-        [x,y] = d2xy(n, index);
+    path.lineTo(unit/2, unit/2);
+
+    for (let index = 0; index < 2**order*2**order; index++) {
+        [x,y] = d2xy(2**order, index);
         path.lineTo(x * unit +unit/2, y * unit + unit/2);
+    }
+
+    if ((order % 2) == 1) {
+        path.lineTo(width, unit/2);
+    } else {
+        path.lineTo(width - unit/2, 0);
     }
     
     return path;
