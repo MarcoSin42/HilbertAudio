@@ -15,7 +15,6 @@
     <label> Choose a file to be 'Hilbertized' and listened to</label>
     <div id="curve" class="graph">  
         <canvas id="mycanvas" width="600" height="600"></canvas>
-        <img alt="" width="600" height="600" id="imageOutput">
     </div>
 
     
@@ -112,13 +111,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                /**
-                $("#imageOutput")
-                    .attr('src', e.target.result)
-                    .attr('width', width)
-                    .attr('height', height)
-                    .attr("opacity", "25%");*/
-                
+        
                 img.src = e.target.result;
                 img.onload = function() {
                     ctx.drawImage(img, 0, 0, 2**order, 2**order);
