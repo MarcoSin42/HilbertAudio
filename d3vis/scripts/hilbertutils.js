@@ -81,9 +81,9 @@ function generatePath(order, size) {
     }
 
     if ((order % 2) == 1) {
-        path.lineTo(width, unit/2);
+        path.lineTo(size, unit/2);
     } else {
-        path.lineTo(width - unit/2, 0);
+        path.lineTo(size - unit/2, 0);
     }
     
     return path;
