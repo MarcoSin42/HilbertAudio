@@ -16,7 +16,7 @@ function playSound(arr, context) {
 }
 
 /**
- * Produces a sinewave at the designated frequency
+ * Produces the value of the sin at sampleNumber
  * @param {int} sampleNumber 
  * @param {int} tone 
  * @param {AudioContext} context 
