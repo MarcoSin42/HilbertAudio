@@ -17,8 +17,6 @@
         <canvas id="mycanvas" width="600" height="600"></canvas>
     </div>
 
-    
-
     <div>
         <input type="file"
             id="image" name="image"
@@ -40,11 +38,12 @@
 
 <script type="text/javascript">
 
-    var width = 600;
-    var height = 600;
+    var sideLength = 600;
     var order = 4;
     var audioCtx = new AudioContext();
     var img = new Image;
+
+    var colourPath;
 
     var c = document.getElementById("mycanvas");
     var ctx = c.getContext("2d");
@@ -55,8 +54,8 @@
     ctx.imageSmoothingEnabled = false;
 
     var svg = d3.select("#curve").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", sideLength)
+        .attr("height", sideLength);
 
     svg.append("rect")
         .attr('width', "100%") 
@@ -71,29 +70,32 @@
         .style("stroke-width", 64 / 2**order)
         .style("opacity", 0.5)
         .style("fill", "none")
-        .attr("d", generatePath(order, width));
+        .attr("d", generatePath(order, sideLength));
     
     var len = path.node().getTotalLength();
 
-    var arr = [],
-        volume = 0.2,
-        seconds = 2.0,
-        tone = 441
-  
-    for (var i = 0; i < audioCtx.sampleRate * seconds; i++) {
-        arr[i] = sineWaveAt(i, tone, audioCtx) * volume
-    }
+    
 
-    function updateOrder(newOrder)
+    function updateOrder(newOrder = order)
     {
         order = newOrder;
+        var x,y, data;
         ctx.drawImage(img, 0, 0, 2**order, 2**order);
+        colourPath = [];
+        // Get the pixel colour path
+        for (let i = 0; i < (2**order)**2; i++) {
+            [x,y] = d2xy(2**order, i);
+
+            data = ctx.getImageData(x,y, 1, 1).data;
+            colourPath.push(`rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`);
+        }
+
         ctx.drawImage(c, 0, 0, 2**order, 2**order, 0, 0, c.width, c.height);
 
         path.style("stroke", "black")
             .style("stroke-width", 64 / 2**newOrder)
             .style("fill", "none")
-            .attr("d", generatePath(newOrder, width))
+            .attr("d", generatePath(newOrder, sideLength))
             .interrupt();
 
         len = path.node().getTotalLength();
@@ -110,15 +112,12 @@
     function updatebg(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            reader.onload = function (e) {
-        
+            reader.onload = function (e) {        
                 img.src = e.target.result;
-                img.onload = function() {
-                    ctx.drawImage(img, 0, 0, 2**order, 2**order);
-                    ctx.drawImage(c, 0, 0, 2**order, 2**order, 0, 0, c.width, c.height);
-                }
-
                 
+                img.onload = function() {
+                    updateOrder();
+                }
             };
             reader.readAsDataURL(input.files[0]);
         }
