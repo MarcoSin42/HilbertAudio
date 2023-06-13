@@ -1,4 +1,4 @@
-from hilbertutils import generate_hilbert_path, d2xy, xy2d
+from hilbertutils import generate_hilbert_path
 import sys
 import numpy as np
 from PIL import Image, ImageOps
@@ -7,9 +7,9 @@ from math import floor
 from scipy.io.wavfile import write
 
 LOWER_FREQ = 27.5 # Hz
-UPPER_FREQ = 4186 // 2 # Hz
+UPPER_FREQ = 4186 // 16 # Hz
 
-SAMPLE_RATE = 44100 
+SAMPLE_RATE = 48000 
 VOLUME = 0.5 # range [0, 1]
 
 DURATION = 5 #s
@@ -61,7 +61,7 @@ if __name__ == '__main__':
         pixel:int = image.getpixel(d)
         x,y = d
 
-        f:float = contMapToFreq(pixel)
+        f:float = contMapToPiano(pixel)
 
         """
           "np.arange(SAMPLE_RATE*duration)*f/SAMPLE_RATE)" : 
