@@ -14,7 +14,7 @@
 <body>
     <label> Choose a file to be 'Hilbertized' and listened to</label>
     <div id="curve" class="graph">  
-        <canvas id="mycanvas" width="600" height="600"></canvas>
+        <canvas id="mycanvas" width="600" height="600" pointer-events="all"></canvas>
     </div>
 
     <div>
@@ -30,6 +30,8 @@
             step="1" 
             oninput="orderOutputId.value = orderInputId.value; updateOrder(orderInputId.value);">  
         <output> Order: </output><output id="orderOutputId">4</output>
+        <output> ----Sampled Pixel: </output>
+        <canvas id="sampledPixel" width="30" height="30"></canvas>
     </div>
 
     
@@ -47,6 +49,10 @@
 
     var c = document.getElementById("mycanvas");
     var ctx = c.getContext("2d");
+    
+    var sample = document.getElementById("sampledPixel");
+
+    
 
     ctx.msImageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;
@@ -55,7 +61,26 @@
 
     var svg = d3.select("#curve").append("svg")
         .attr("width", sideLength)
+        .attr('pointer-events', 'none')
         .attr("height", sideLength);
+    
+    c.addEventListener('click', function (event) 
+    {
+        var x = event.pageX - (c.offsetLeft + c.clientLeft);
+        var y = event.pageY - (c.offsetTop + c.clientTop);
+        // console.log(`${x}, ${y}`)
+        var pixelCtx = sample.getContext('2d');
+
+        
+        var data = ctx.getImageData(x,y, 1, 1).data;
+
+        pixelCtx.fillStyle = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+        pixelCtx.beginPath();
+        pixelCtx.clearRect(0, 0, 30, 30);
+        pixelCtx.fillRect(0, 0, 30, 30);
+        pixelCtx.stroke();
+
+    }, false);
 
     svg.append("rect")
         .attr('width', "100%") 
@@ -122,7 +147,6 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-
 
 
 </script>
