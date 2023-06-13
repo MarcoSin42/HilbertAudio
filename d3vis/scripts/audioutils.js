@@ -44,3 +44,15 @@ function playSoundForSec(tone, context, seconds)
 
     return arr
 }
+
+/**
+ * Maps a color by first converting to greyscale then to a tone between [28, 284]
+ * @param {int} r Represents the red component [0,255]
+ * @param {int} g Represents the green component [0,255]
+ * @param {int} b Represents the blue componenet [0,255] 
+ * @returns A tone between 28 hz and 284 hz
+ */
+function mapColorToTone(r, g, b)
+{
+    return 0.3*r + 0.59*g + 0.11*b;
+}
