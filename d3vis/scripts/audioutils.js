@@ -54,5 +54,5 @@ function playSoundForSec(tone, context, seconds)
  */
 function mapColorToTone(r, g, b)
 {
-    return 0.3*r + 0.59*g + 0.11*b;
+    return 28 + 0.3*r + 0.59*g + 0.11*b;
 }
