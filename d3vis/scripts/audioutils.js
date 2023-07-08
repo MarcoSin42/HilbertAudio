@@ -23,8 +23,8 @@ function playSound(arr, context) {
  * @returns 
  */
 function sineWaveAt(sampleNumber, tone, context) {
-    var sampleFreq = context.sampleRate / tone
-    return Math.sin(sampleNumber / (sampleFreq / (Math.PI * 2)))
+    var sampleFreq = context.sampleRate / tone;
+    return Math.sin(sampleNumber / (sampleFreq / (Math.PI * 2)));
 }
 
 /** Produces a sound buffer for which to play
@@ -39,10 +39,10 @@ function playSoundForSec(tone, context, seconds)
     var volume = 0.2;
   
     for (var i = 0; i < context.sampleRate * seconds; i++) {
-        arr[i] = sineWaveAt(i, tone, context) * volume
+        arr[i] = sineWaveAt(i, tone, context) * volume * pinkNoise(tone);
     }
 
-    return arr
+    return arr;
 }
 
 /**
