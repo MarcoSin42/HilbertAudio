@@ -56,3 +56,13 @@ function mapColorToTone(r, g, b)
 {
     return 28 + 0.3*r + 0.59*g + 0.11*b;
 }
+
+/**
+ * Produces the factor for which to reduce a noise db level.
+ * @param {float} f 
+ * @returns a float between 0 and 1
+ */
+function pinkNoise(f)
+{
+    return 1/f;
+}
