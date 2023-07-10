@@ -8,7 +8,7 @@
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
-<h1>D3 Visualization of a 4x4 Hilbert curve</h1>
+<h1>D3 Visualization of a Hilbert curve</h1>
 
 
 <body>
@@ -22,6 +22,8 @@
             id="image" name="image"
             accept="image/png, image/jpeg"
             oninput="updatebg(this)">
+        <button
+            onclick="console.log('test');">Play</button>
 
         <input type="range" 
             value="4" 
@@ -70,13 +72,13 @@
         var y = event.pageY - (c.offsetTop + c.clientTop);
         // console.log(`${x}, ${y}`)
         var pixelCtx = sample.getContext('2d');
-
         
         var data = ctx.getImageData(x,y, 1, 1).data;
 
         pixelCtx.fillStyle = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
         pixelCtx.beginPath();
         pixelCtx.clearRect(0, 0, 30, 30);
+        pixelCtx.rect(0, 0, 30, 30);
         pixelCtx.fillRect(0, 0, 30, 30);
         pixelCtx.stroke();
 
@@ -112,7 +114,7 @@
             [x,y] = d2xy(2**order, i);
 
             data = ctx.getImageData(x,y, 1, 1).data;
-            colourPath.push(`rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`);
+            colourPath.push([data[0], data[1], data[2]]);
         }
 
         ctx.drawImage(c, 0, 0, 2**order, 2**order, 0, 0, c.width, c.height);
