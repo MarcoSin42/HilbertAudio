@@ -129,7 +129,14 @@
         len = path.node().getTotalLength();
         var samplesPerPixel = Math.floor(audioCtx.sampleRate * durInSec / colourPath.length); 
 
-        console.log(samplesPerPixel);
+        colourPath.forEach(c => {
+            var tone = mapColorToTone(c[0], c[1], c[2]);
+            var samples = getFreqSamples(tone, audioCtx, samplesPerPixel);
+            audioBuffer.copyToChannel(samples, 0, curSample);
+            curSample = curSample + samplesPerPixel;
+        });
+        
+
         path.attr('stroke-dasharray', len + " " + len)
             .attr("stroke-dashoffset", len)
             .transition()
@@ -138,12 +145,6 @@
         //playSound(colorBuf, audioCtx);
         var curSample = 0;
 
-        colourPath.forEach(c => {
-            var tone = mapColorToTone(c[0], c[1], c[2]);
-            var samples = getFreqSamples(tone, audioCtx, samplesPerPixel);
-            audioBuffer.copyToChannel(samples, 0, curSample);
-            curSample = curSample + samplesPerPixel;
-        });
         
         const source = audioCtx.createBufferSource();
 

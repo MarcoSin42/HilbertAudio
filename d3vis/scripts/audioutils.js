@@ -44,7 +44,7 @@ function getFreqSamples(tone, context, samples)
     for (var i = 0; i < samples; i++) {
         arr[i] = sineWaveAt(i, tone, context) * volume * pinkPower(tone);
     }
-    console.log(arr);
+    // console.log(arr);
 
     return arr;
 }
