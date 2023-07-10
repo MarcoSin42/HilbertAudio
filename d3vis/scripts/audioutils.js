@@ -1,3 +1,6 @@
+const LOWER_FREQ = 27.5 // Hz
+const UPPER_FREQ = 4186 // 16 # Hz
+
 
 /**
  * Takes in an audio buffer, play it
@@ -17,9 +20,9 @@ function playSound(arr, context) {
 
 /**
  * Produces the value of the sin at sampleNumber
- * @param {int} sampleNumber 
- * @param {int} tone 
- * @param {AudioContext} context 
+ * @param {int} sampleNumber The number of samples
+ * @param {int} tone The frequency of the sinewave
+ * @param {AudioContext} context The device context from which the sinewave will play from
  * @returns 
  */
 function sineWaveAt(sampleNumber, tone, context) {
@@ -36,10 +39,10 @@ function sineWaveAt(sampleNumber, tone, context) {
 function playSoundForSec(tone, context, seconds)
 {
     var arr = [];
-    var volume = 0.2;
+    var volume = 1;
   
     for (var i = 0; i < context.sampleRate * seconds; i++) {
-        arr[i] = sineWaveAt(i, tone, context) * volume * pinkNoise(tone);
+        arr[i] = sineWaveAt(i, tone, context) * volume * pinkPower(tone);
     }
 
     return arr;
@@ -54,7 +57,11 @@ function playSoundForSec(tone, context, seconds)
  */
 function mapColorToTone(r, g, b)
 {
-    return 28 + 0.3*r + 0.59*g + 0.11*b;
+    var greyscale = 28 + 0.3*r + 0.59*g + 0.11*b;
+    
+    return d3.scaleLinear()
+        .domain([0,255])
+        .range([LOWER_FREQ, UPPER_FREQ])(greyscale);
 }
 
 /**
@@ -62,7 +69,7 @@ function mapColorToTone(r, g, b)
  * @param {float} f 
  * @returns a float between 0 and 1
  */
-function pinkNoise(f)
+function pinkPower(f)
 {
-    return 1/f;
+    return 1/(Math.sqrt(f));
 }
