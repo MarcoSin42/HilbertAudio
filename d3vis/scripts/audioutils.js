@@ -33,17 +33,18 @@ function sineWaveAt(sampleNumber, tone, context) {
 /** Produces a sound buffer for which to play
  * @param {int} tone The frequency to play
  * @param {AudioContext} context The audio context
- * @param {float} seconds How long to play the tone 
+ * @param {int} samples How long to play the tone 
  * @returns Audio Buffer
  */
-function playSoundForSec(tone, context, seconds)
+function getFreqSamples(tone, context, samples)
 {
-    var arr = [];
+    var arr = new Float32Array(samples);
     var volume = 1;
   
-    for (var i = 0; i < context.sampleRate * seconds; i++) {
+    for (var i = 0; i < samples; i++) {
         arr[i] = sineWaveAt(i, tone, context) * volume * pinkPower(tone);
     }
+    console.log(arr);
 
     return arr;
 }
@@ -71,5 +72,5 @@ function mapColorToTone(r, g, b)
  */
 function pinkPower(f)
 {
-    return 1/(Math.sqrt(f));
+    return 5/(Math.sqrt(f));
 }
