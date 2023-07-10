@@ -23,7 +23,7 @@
             accept="image/png, image/jpeg"
             oninput="updatebg(this)">
         <button
-            onclick="console.log('test');">Play</button>
+            onclick="console.log('test'); updateOrder();">Play</button>
 
         <input type="range" 
             value="4" 
@@ -41,10 +41,11 @@
 </body>
 
 <script type="text/javascript">
-
+    const durInSec = 2;
     var sideLength = 600;
     var order = 4;
     var audioCtx = new AudioContext();
+    var audioBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate*2, audioCtx.sampleRate);
     var img = new Image;
 
     var colourPath;
@@ -126,13 +127,31 @@
             .interrupt();
 
         len = path.node().getTotalLength();
+        var samplesPerPixel = Math.floor(audioCtx.sampleRate * durInSec / colourPath.length); 
 
+        console.log(samplesPerPixel);
         path.attr('stroke-dasharray', len + " " + len)
             .attr("stroke-dashoffset", len)
             .transition()
-            .duration(2000)
+            .duration(durInSec*1000)
             .attr('stroke-dashoffset', 0);
+        //playSound(colorBuf, audioCtx);
+        var curSample = 0;
+
+        colourPath.forEach(c => {
+            var tone = mapColorToTone(c[0], c[1], c[2]);
+            var samples = getFreqSamples(tone, audioCtx, samplesPerPixel);
+            audioBuffer.copyToChannel(samples, 0, curSample);
+            curSample = curSample + samplesPerPixel;
+        });
         
+        const source = audioCtx.createBufferSource();
+
+        source.buffer = audioBuffer;
+
+        source.connect(audioCtx.destination);
+
+        source.start();
     }
 
 
