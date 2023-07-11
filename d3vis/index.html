@@ -42,6 +42,8 @@
 
 <script type="text/javascript">
     const durInSec = 2;
+    const quantum = 1000;
+
     var sideLength = 600;
     var order = 4;
     var audioCtx = new AudioContext();
@@ -141,7 +143,7 @@
         path.attr('stroke-dasharray', len + " " + len)
             .attr("stroke-dashoffset", len)
             .transition()
-            .duration(durInSec*1000)
+            .duration(durInSec*quantum)
             .attr('stroke-dashoffset', 0);
         //playSound(colorBuf, audioCtx);
 

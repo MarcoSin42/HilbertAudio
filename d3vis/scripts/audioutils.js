@@ -50,7 +50,7 @@ function getFreqSamples(tone, context, samples)
 }
 
 /**
- * Maps a color by first converting to greyscale then to a tone between [28, 284]
+ * Maps a color by first converting to greyscale then to a tone in the range [LOWER_FREQ, UPPER_FREQ]
  * @param {int} r Represents the red component [0,255]
  * @param {int} g Represents the green component [0,255]
  * @param {int} b Represents the blue componenet [0,255] 
@@ -72,5 +72,5 @@ function mapColorToTone(r, g, b)
  */
 function pinkPower(f)
 {
-    return 5/(Math.sqrt(f));
+    return 1/(Math.sqrt(f));
 }
