@@ -5,6 +5,19 @@ Sight through Sound is project which, as the name suggests, seeks to be a sight 
 1. Given an image, map each pixel to a point on the Hilbert curve.
 2. Interpret the mapped pixels as a sound.  
 
+# How to run the D3 visualization
+
+Clone the git repository.  Navigate the d3vis directory using your favourite terminal.  Start a local webserver, you can do this using Python3 with the following command:
+
+    python3 -m http.server
+
+In your favourite web browser, navigate to http://127.0.0.1:8080/
+
+Alternatively, you can specify a port number by appending it to the above command.  For example if you wanted to open it on port 1234 then you'd enter: 
+
+    python3 -m http.server 1234
+
+Then, navigate to http://127.0.0.1:1234/ in your web browser.
 
 # Current challenges
 
