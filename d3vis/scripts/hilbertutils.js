@@ -1,4 +1,12 @@
 /** Reimplementation of the python algorithm */
+
+/** 
+ * Takes a 2d point and returns the point's location on the hilbert curve
+ * @param   {int} n The dimension of the hilbert curve
+ * @param   {int} x The x coordinate of the 2d point
+ * @param   {int} y The y coordinate of the 2d point
+ * @returns {int} d The point on the hilbert curve
+ */
 function xy2d(n, x, y) {
     var rx = 0;
     var ry = 0;
@@ -18,6 +26,12 @@ function xy2d(n, x, y) {
     return d;
 }
 
+/**
+ * Takes a point on the n-order hilbert curve and returns it's coordinates in 2d
+ * @param {int} n The dimension of the hilbert curve
+ * @param {int} d The point on the hilbert curve
+ * @returns {[int, int]} x,y the 2d point on the hilbert curve
+ */
 function d2xy(n, d) {
     var rx = 0;
     var ry = 0;
@@ -43,6 +57,15 @@ function d2xy(n, d) {
     return [x,y];
 }
 
+/**
+ * 
+ * @param   {int} n The dimension of the hilbert curve
+ * @param   {int} x The x coordinate of the 2d point
+ * @param   {int} y The y coordinate of the 2d point
+ * @param   {int} rx rotate on x 
+ * @param   {int} ry rotate on y
+ * @returns {[int, int]} the rotated point
+ */
 function rot(n, x, y, rx, ry) {
     var t;
     if (ry == 0) {
@@ -56,17 +79,23 @@ function rot(n, x, y, rx, ry) {
     return [x, y];
 }
 
-function generatePath(order, size) {
+/**
+ * Generates a d3 path adjusted according to size of canvas
+ * @param   {int} n The dimension of the hilbert curve
+ * @param   {int} size The dimensions of the canvas, typically the shortest side if non-square
+ * @returns {d3.path} The translated 2d points of the hilbert curve
+ */
+function generatePath(n, size) {
     /**
      * param order (int): The order of the hilbert curve
      * param size (int): The actual dimensions of the canvas
      */
     var path = d3.path();
 
-    var unit = size / (2**order);
+    var unit = size / (2**n);
     var x,y;
 
-    if ((order % 2) == 1) {
+    if ((n % 2) == 1) {
         path.moveTo(0, unit/2);
     } else {
         path.moveTo(unit/2, 0);
@@ -75,12 +104,12 @@ function generatePath(order, size) {
 
     path.lineTo(unit/2, unit/2);
 
-    for (let index = 0; index < 2**order*2**order; index++) {
-        [x,y] = d2xy(2**order, index);
+    for (let index = 0; index < 2**n*2**n; index++) {
+        [x,y] = d2xy(2**n, index);
         path.lineTo(x * unit +unit/2, y * unit + unit/2);
     }
 
-    if ((order % 2) == 1) {
+    if ((n % 2) == 1) {
         path.lineTo(size, unit/2);
     } else {
         path.lineTo(size - unit/2, 0);
