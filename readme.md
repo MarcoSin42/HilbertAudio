@@ -9,6 +9,7 @@ You can imagine the mappings of the snakey curve and the hilbert curve as if we 
 
 This project is mostly completed and was only meant as a proof of concept for a phone app which will do a similar thing except will utilize the phone's camera instead of user-fed images.  Any updates are highly unlikely.
 
+[Try the Web demo here!](https://infinity315.github.io/stsdemo/)
 
 # How to run the D3 visualization
 
