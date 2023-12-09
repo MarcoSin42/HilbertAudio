@@ -12,7 +12,7 @@ This project is mostly completed and was only meant as a proof of concept for a 
 
 ** NOTE ** I wouldn't go any higher than order 4 or 5 and I'd lower the volume down to < 20%.   
 
-[**Try the Web demo here!**](https://infinity315.github.io/HilbertAudio/)
+[**Try the Web demo here!**](https://MarcoSin42.github.io/HilbertAudio/)
 
 # How to run the D3 visualization
 
